@@ -1,7 +1,7 @@
 <%@page import="com.douzone.mysite.vo.UserVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	UserVo  authUser = (UserVo)session.getAttribute("authUser");
+	UserVo authUser = (UserVo)session.getAttribute("authUser");
 %>
 
 <div id="header">
@@ -18,7 +18,7 @@
 			 %>
 					<li><a href="<%=request.getContextPath() %>/user?a=updateform">회원정보수정</a><li>
 					<li><a href="<%=request.getContextPath() %>/user?a=logout">로그아웃</a><li>
-					<li><%=authUser.getName() %>님 안녕하세요 ^^;</li>
+					<li><%=authUser.getName() %>님 안녕하세요 ^^</li>
 			<%
 					}
 			 %>

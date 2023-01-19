@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
 import com.douzone.mysite.vo.UserVo;
 
 public class UserDao {
@@ -28,12 +29,14 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				result = new UserVo();
-				
+	
 				Long no = rs.getLong(1);
 				String name = rs.getString(2);
+
 				
 				result.setNo(no);
 				result.setName(name);
+	
 			}
 
 			
@@ -92,8 +95,104 @@ public class UserDao {
 	         }
 	      }
 	   }
-
 	
+
+	public void update(UserVo vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			
+			if ("".equals(vo.getPassword())) {
+				String sql = "update user set name = ?, gender = ? where no=?";
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, vo.getName());
+		        pstmt.setString(2, vo.getGender());
+		        pstmt.setLong(3, vo.getNo());	
+		        
+			} else {
+				String sql = "update user set name = ?, password = password(?), gender = ? where no=?";
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setString(1, vo.getName());
+		        pstmt.setString(2, vo.getPassword());
+		        pstmt.setString(3, vo.getGender());
+		        pstmt.setLong(4, vo.getNo());
+			}
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public UserVo findByNo(Long no) {
+		UserVo vo = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql =
+				"select no, name, email, password, gender from user where no=?";
+		
+		try {
+			conn = getConnection();
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, no);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new UserVo();
+				
+				no = rs.getLong(1);
+				String name = rs.getString(2);
+				String email = rs.getString(3);
+				String password = rs.getString(4);
+				String gender = rs.getString(5);
+				
+				vo.setNo(no);
+				vo.setName(name);
+				vo.setEmail(email);
+				vo.setPassword(password);
+				vo.setGender(gender);
+			}
+		}
+		
+		catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return vo;
+	}
+
 
 
 	private Connection getConnection() throws SQLException {
@@ -108,6 +207,8 @@ public class UserDao {
 		}
 		return conn;
 	}
+
+
 
 	
 

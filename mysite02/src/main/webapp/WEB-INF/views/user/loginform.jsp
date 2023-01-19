@@ -20,7 +20,7 @@
 					<input id="email" name="email" type="text" value='<%=(email == null ? "" : email) %>'">
 					<label class="block-label" >패스워드</label>
 					<input name="password" type="password" value="">
-						<%
+					<%
 						if(null != email){
 					%>
 						<p>
