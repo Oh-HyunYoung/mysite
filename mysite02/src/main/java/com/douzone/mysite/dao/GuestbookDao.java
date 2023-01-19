@@ -47,9 +47,7 @@ public class GuestbookDao {
 		return result;		
 	}
 	
-	public Boolean insert(GuestbookVo vo) {
-		boolean result = false;
-		
+	public void insert(GuestbookVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -62,10 +60,9 @@ public class GuestbookDao {
 			pstmt.setString(2, vo.getPassword());
 			pstmt.setString(3, vo.getMessage());
 			
-			int count = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
-			//5. 결과 처리
-			result = count == 1;
+
 			
 		} catch (SQLException e) {
 			System.out.println("Error:" + e);
@@ -82,8 +79,7 @@ public class GuestbookDao {
 				e.printStackTrace();
 			}
 		}
-		
-		return result;
+
 	}
 	
 	public List<GuestbookVo> findAll() {
