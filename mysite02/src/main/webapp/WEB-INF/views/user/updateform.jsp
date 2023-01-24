@@ -34,7 +34,7 @@
 					
 					<fieldset>
 						<legend>성별</legend>
-
+					
 					<%
 						if("female".equals(vo.getGender())){
 					%>
