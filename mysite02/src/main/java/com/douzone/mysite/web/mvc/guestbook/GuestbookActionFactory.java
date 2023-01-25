@@ -1,6 +1,5 @@
 package com.douzone.mysite.web.mvc.guestbook;
 
-import com.douzone.mysite.web.mvc.main.MainAction;
 import com.douzone.web.mvc.Action;
 import com.douzone.web.mvc.ActionFactory;
 
