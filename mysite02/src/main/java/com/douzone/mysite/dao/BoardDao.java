@@ -187,7 +187,7 @@ public class BoardDao {
 		try {
 			conn = getConnection();
 
-				String sql = "update board set title = ?, contents = ?";
+				String sql = "update board set title = ?, contents = ? where no=?";
 				pstmt = conn.prepareStatement(sql);
 				
 				pstmt.setString(1, vo.getTitle());
