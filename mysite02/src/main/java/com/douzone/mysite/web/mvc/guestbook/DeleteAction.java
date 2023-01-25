@@ -12,7 +12,6 @@ import com.douzone.web.util.MvcUtil;
 
 public class DeleteAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	request.setCharacterEncoding("utf-8");
 	String sno = request.getParameter("no");
 	Long no = Long.parseLong(sno);
 	String password = request.getParameter("password");

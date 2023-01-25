@@ -24,17 +24,14 @@
 							<td>비밀번호</td><td><input type="password" name="password"></td>
 						</tr>
 						<tr>
-							<td colspan=4><textarea name="message" id="message"></textarea></td>
+							<td colspan=4><textarea name="message" id="content"></textarea></td>
 						</tr>
 						<tr>
 							<td colspan=4 align=right><input type="submit" VALUE=" 확인 "></td>
 						</tr>
 					</table>
-				</form>
-	<br>
-
+	</form>
 	<ul>
-
 		<c:set var="count" value="${fn:length(list) }" />
 		<c:forEach items="${list }" var ="vo" varStatus="status">
 					<li>
@@ -43,7 +40,7 @@
 								<td>[${count - status.index }]</td>
 								<td>${vo.name }</td>
 								<td>${vo.regDate }</td>
-								<td><a href="${pageContext.request.contextPath }/guestbook?a=deleteform&no=${vo.no() }">삭제</a></td>
+								<td><a href="${pageContext.request.contextPath }/guestbook?a=deleteform&no=${vo.no }">삭제</a></td>
 							</tr>
 							<tr>
 								<td colspan=4>
@@ -55,8 +52,6 @@
 					</li>
 		</c:forEach>
 				</ul>
-
-	
 			</div>
 		</div>
 			<c:import url="/WEB-INF/views/includes/navigation.jsp"/>
