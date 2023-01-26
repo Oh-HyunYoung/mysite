@@ -12,7 +12,7 @@ public class BoardActionFactory extends ActionFactory {
 		if("write".equals(actionName)) {
 			action = new WriteAction();
 		} else if ("writeform".equals(actionName)) {
-			//action = new WriteformAction();
+			action = new WriteformAction();
 		} else if("view".equals(actionName)) {
 			action = new ViewAction();
 		} else if("viewform".equals(actionName)) {
@@ -21,6 +21,10 @@ public class BoardActionFactory extends ActionFactory {
 			action = new ModifyAction();
 		} else if("modifyform".equals(actionName)) {
 			action = new ModifyformAction();
+	    } else if("delete".equals(actionName)) {
+	    	action = new DeleteAction();
+	    } else if("deleteform".equals(actionName)) {
+	    	action = new DeleteformAction();
 	    } else {
 			action = new ListAction();
 		}
