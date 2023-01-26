@@ -4,7 +4,7 @@ public class BoardVo {
 	private Long no;
 	private String title;
 	private String contents;
-	private int hit;
+	private Long hit;
 	private String reg_date;
 	private Long group_no;
 	private Long order_no;
@@ -37,11 +37,10 @@ public class BoardVo {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	
-	public int getHit() {
+	public Long getHit() {
 		return hit;
 	}
-	public void setHit(int hit) {
+	public void setHit(Long hit) {
 		this.hit = hit;
 	}
 	public String getReg_date() {
@@ -80,5 +79,7 @@ public class BoardVo {
 				+ reg_date + ", group_no=" + group_no + ", order_no=" + order_no + ", depth=" + depth + ", user_no="
 				+ user_no + ", name=" + name + "]";
 	}
+
+	
 
 }

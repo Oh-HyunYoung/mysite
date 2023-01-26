@@ -25,7 +25,7 @@
 					
 					<table class="tbl-ex">
 						<tr>
-							<th colspan="2">글쓰기</th>
+							<th colspan="2">답글쓰기</th>
 						</tr>
 						<tr>
 							<td class="label">제목</td>
@@ -42,7 +42,7 @@
 							<c:when test='${not empty sessionScope.authUser.no }'>
 					<div class="bottom">
 						<a href="${pageContext.servletContext.contextPath }/board">취소</a>
-						<input type="submit" value="등록">
+						<input type="submit" value="답글등록">
 					</div>
 					</c:when>
 					<c:otherwise>
@@ -63,9 +63,6 @@
 								<td>${vo.title }</td>
 								<td>${vo.contents }</td>
 							</tr>
-							
-							
-						
 							<tr>
 							</tr>
 						</table>

@@ -16,8 +16,7 @@
 			<div id="board">
 				<form id="search_form"
 					action="${pageContext.request.contextPath }/board" method="post">
-					<input type="text" id="kwd" name="kwd" value=""> <input
-						type="submit" value="찾기">
+					<input type="text" id="kwd" name="kwd" value=""> <input type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
 					<tr>
@@ -37,39 +36,10 @@
 										<td>${vo.name }</td>
 										<td>${vo.hit }</td>
 										<td>${vo.reg_date }</td>
-										<td><a href="" class="del">삭제</a></td>
+										<td><a href="${pageContext.request.contextPath }/board?a=deleteform&no=${vo.no}" class="del">삭제</a></td>
 									</tr>
 						</c:forEach>
 						</table>
-						<!--
-						<td>3</td>
-						<td style="text-align: left"><a href="">세 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-10-11 12:04:20</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td style="text-align: left; padding-left: 0px"><img
-							src="${pageContext.request.contextPath }/assets/images/reply.png">
-							<a href="">두 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-10-02 12:04:12</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td style="text-align: left; padding-left: 15px"><img
-							src="${pageContext.request.contextPath }/assets/images/reply.png">
-							<a href="">첫 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-09-25 07:24:32</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					  -->
 				</table>
 				<!-- pager 추가 -->
 				<div class="pager">
@@ -86,7 +56,7 @@
 				<!-- pager 추가 -->
 
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board?a=write"
+					<a href="${pageContext.request.contextPath }/board?a=writeform"
 						id="new-book">글쓰기</a>
 				</div>
 			</div>

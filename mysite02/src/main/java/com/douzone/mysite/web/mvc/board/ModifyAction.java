@@ -13,17 +13,19 @@ import com.douzone.web.util.MvcUtil;
 
 public class ModifyAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//String sno = request.getParameter("no");
-		//Long no = Long.parseLong(sno);
+		
 		String title = request.getParameter("title");
-		String contents = request.getParameter("contents");
-
+		String contents = request.getParameter("content");
+		String sno = request.getParameter("no");
+		Long no = Long.parseLong(sno);
+		
 		BoardVo vo = new BoardVo();
 		vo.setTitle(title);
 		vo.setContents(contents);
+		vo.setNo(no);
 
 		new BoardDao().update(vo);
-		MvcUtil.forward("board/modify", request, response);
+		MvcUtil.redirect(request.getContextPath() + "/board?a=view&no="+no,request,response);
 		
 	}
 }

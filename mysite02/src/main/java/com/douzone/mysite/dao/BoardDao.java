@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.douzone.mysite.vo.BoardVo;
+import com.douzone.mysite.vo.UserVo;
 
 
 public class BoardDao {
@@ -57,7 +58,7 @@ public class BoardDao {
 				String title = rs.getString(2);
 				String contents = rs.getString(3);
 				String name = rs.getString(4);
-				int hit = rs.getInt(5);
+				Long hit = rs.getLong(5);
 				String reg_date = rs.getString(6);
 				Long group_no = rs.getLong(7);
 				Long order_no = rs.getLong(8);
@@ -118,7 +119,7 @@ public class BoardDao {
 				no = rs.getLong(1);
 				String title = rs.getString(2);
 				String contents = rs.getString(3);
-				int hit = rs.getInt(4);
+				Long hit = rs.getLong(4);
 				String reg_date = rs.getString(5);
 				Long group_no = rs.getLong(6);
 				Long order_no = rs.getLong(7);
@@ -191,6 +192,36 @@ public class BoardDao {
 		}
 	}
 
+	public void updatehit(Long no) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		BoardVo vo = new BoardVo();
+		try {
+			conn = getConnection();
+
+			String sql = "update board set hit = hit+1 where no=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setLong(1, no);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void insertByContent(BoardVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;

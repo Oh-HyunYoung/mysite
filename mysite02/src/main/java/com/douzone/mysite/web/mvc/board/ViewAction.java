@@ -13,18 +13,23 @@ import com.douzone.web.util.MvcUtil;
 
 public class ViewAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		
 		String sno = request.getParameter("no");
 		Long no = Long.parseLong(sno);
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
 
+
 		BoardVo vo = new BoardVo();
 		vo.setTitle(title);
 		vo.setContents(contents);
-
-		BoardVo svo = new BoardDao().findByNo(no);
-		request.setAttribute("vo", svo);
-		MvcUtil.forward("board/view", request, response);
 		
+		BoardVo svo = new BoardDao().findByNo(no);
+		new BoardDao().updatehit(no);
+		request.setAttribute("vo", svo);
+		
+		MvcUtil.forward("board/view", request, response);
+//		MvcUtil.redirect(request.getContextPath() + "/board/view",request,response);
 	}
 }
