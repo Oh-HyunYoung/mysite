@@ -21,8 +21,7 @@
 				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board">
 					<input type = "hidden" name = "a" value="write">
 					<input type = "hidden" name = "userNo" value="${sessionScope.authUser.no }">
-					
-					
+					<input type = "hidden" name = "no" value="${no }">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>
@@ -63,9 +62,6 @@
 								<td>${vo.title }</td>
 								<td>${vo.contents }</td>
 							</tr>
-							
-							
-						
 							<tr>
 							</tr>
 						</table>

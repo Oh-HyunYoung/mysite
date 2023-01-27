@@ -30,6 +30,5 @@ public class ViewAction implements Action {
 		request.setAttribute("vo", svo);
 		
 		MvcUtil.forward("board/view", request, response);
-//		MvcUtil.redirect(request.getContextPath() + "/board/view",request,response);
 	}
 }

@@ -15,9 +15,10 @@ import com.douzone.web.util.MvcUtil;
 public class ListAction implements Action {
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String page = request.getParameter("page");
 		List<BoardVo> list = new BoardDao().findAll();
 		request.setAttribute("list", list);
-
+		request.setAttribute("page", page);
 		MvcUtil.forward("board/list",request,response);
 	}
 

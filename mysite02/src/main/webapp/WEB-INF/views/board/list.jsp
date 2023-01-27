@@ -30,33 +30,57 @@
 					<tr>
 						<c:set var="count" value="${fn:length(list) }" />
 						<c:forEach items="${list }" var="vo" varStatus="status">
+
+						<c:if test="${count-10*(page-1) >=count-status.index&&count-10*(page)+1<=count-status.index}">
 									<tr>
-										<td>${vo.no }</td>
-										<td style="text-align: left"><a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no}">${vo.title }</a></td>
+										<td>${count-status.index }</td>
+										
+										<td style="text-align:left; padding-left:${vo.depth*15 }px">
+										<c:if test="${vo.depth>0 }">
+										<img src="${pageContext.request.contextPath }/assets/images/reply.png">
+										</c:if>
+										<a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no}">${vo.title }</a></td>
+										
 										<td>${vo.name }</td>
 										<td>${vo.hit }</td>
 										<td>${vo.reg_date }</td>
-										<td><a href="${pageContext.request.contextPath }/board?a=deleteform&no=${vo.no}" class="del">삭제</a></td>
-									</tr>
+										<td>
+										<c:if test="${vo.user_no == authUser.no }">
+										<a href="${pageContext.request.contextPath }/board?a=deleteform&no=${vo.no}" class="del">삭제</a></td>
+										</c:if>
+									</tr></c:if>
 						</c:forEach>
 						</table>
 				</table>
+
 				<!-- pager 추가 -->
 				<div class="pager">
 					<ul>
-						<li><a href="">◀</a></li>
-						<li><a href="">1</a></li>
+					<li>
+					<c:if test="${page>1 }">
+					<a href="${pageContext.request.contextPath }/board?page=${page-1}">◀</a></c:if>
+					</li>
+						<c:forEach var="i" begin="1" end="${count/10 +1}" step="1">
+							<li><a href="${pageContext.request.contextPath }/board?page=${i}">${i }</a></li>
+						</c:forEach>
+						<li>
+						<c:if test="${page<count/10}">
+						<a href="${pageContext.request.contextPath }/board?page=${page+1}">▶</a></c:if>
+						</li>
+					<!-- 	<li><a href="">◀</a></li>
+						<li><a href="${pageContext.request.contextPath }/board/page=${i}">1</a></li>
 						<li class="selected">2</li>
 						<li><a href="">3</a></li>
 						<li>4</li>
 						<li>5</li>
 						<li><a href="">▶</a></li>
+						 -->
 					</ul>
 				</div>
 				<!-- pager 추가 -->
 
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board?a=writeform"
+					<a href="${pageContext.request.contextPath }/board?a=writeform&no=-1"
 						id="new-book">글쓰기</a>
 				</div>
 			</div>

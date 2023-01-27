@@ -14,32 +14,35 @@ import com.douzone.web.util.MvcUtil;
 public class WriteAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-//		String sno = request.getParameter("no");
-//		Long no = Long.parseLong(sno);
-
-//String name = request.getParameter("name");
-//		String nhit = request.getParameter("hit");
-//		Long hit = Long.parseLong(nhit);
-//		String regDate = request.getParameter("regDate");
+		String sno = request.getParameter("no");
+		Long no = Long.parseLong(sno);
 		String title = request.getParameter("title");
 		String contents = request.getParameter("content");
+		String user_no = request.getParameter("userNo");
+		Long user = Long.parseLong(user_no);
 		
-		String sno = request.getParameter("userNo");
-		Long userNo = Long.parseLong(sno);
-
+		
 		BoardVo vo = new BoardVo();
+		if (no==-1) {
+			vo.setGroup_no(new BoardDao().maxgno()+1);
+			vo.setOrder_no(1L);
+			vo.setDepth(0L);
+		}
+		else {
+			vo=new BoardDao().findByNo(no);
+			new BoardDao().updateNo(vo.getGroup_no(),vo.getOrder_no());
+			vo.setOrder_no(vo.getOrder_no()+1);
+			vo.setDepth(vo.getDepth()+1);
+		}
 		vo.setTitle(title);
 		vo.setContents(contents);
-		vo.setUser_no(userNo);
-//		vo.setHit(hit);
-//		vo.setReg_date(regDate);
-//vo.setName(name);
-
+		vo.setUser_no(user);
+		new BoardDao().insert(vo);
 		
-
-		new BoardDao().insertByContent(vo);
-		MvcUtil.redirect(request.getContextPath() + "/board?a=list",request,response);
+		MvcUtil.redirect(request.getContextPath() + "/board?page=1",request,response);
 	}
+
+
 
 }
 
