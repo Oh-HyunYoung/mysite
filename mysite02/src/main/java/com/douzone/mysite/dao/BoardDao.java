@@ -169,7 +169,7 @@ public class BoardDao {
 	public void updatehit(Long no) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		BoardVo vo = new BoardVo();
+//		BoardVo vo = new BoardVo();
 		try {
 			conn = getConnection();
 

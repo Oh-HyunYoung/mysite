@@ -31,7 +31,7 @@
 						<c:set var="count" value="${fn:length(list) }" />
 						<c:forEach items="${list }" var="vo" varStatus="status">
 
-						<c:if test="${count-10*(page-1) >=count-status.index&&count-10*(page)+1<=count-status.index}">
+						<c:if test="${count-10*(page-1) >=count-status.index&&count-10*(page+1)<=count-status.index}">
 									<tr>
 										<td>${count-status.index }</td>
 										

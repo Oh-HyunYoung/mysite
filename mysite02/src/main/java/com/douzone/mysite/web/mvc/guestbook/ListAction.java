@@ -17,7 +17,6 @@ public class ListAction implements Action {
 		List<GuestbookVo> list = new GuestbookDao().findAll();
 		
 		request.setAttribute("list", list);
-		
 		MvcUtil.forward("guestbook/list", request, response);
 	}
 }
