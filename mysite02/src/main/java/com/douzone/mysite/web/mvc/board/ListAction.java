@@ -16,9 +16,11 @@ public class ListAction implements Action {
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = request.getParameter("page");
-		String text = request.getParameter("searchText");
+		String text = request.getParameter("kwd");
+		request.setAttribute("searchText", text);
 		List<BoardVo> list = null;
-		if (text == null) {
+
+		if (text == null || text == "") {
 			list = new BoardDao().findAll();
 		} else {
 			list = new BoardDao().searchList(text);

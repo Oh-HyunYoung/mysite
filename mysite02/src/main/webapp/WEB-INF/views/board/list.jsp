@@ -15,8 +15,8 @@
 		<div id="content">
 			<div id="board">
 				<form id="search_form"
-					action="" method="post">
-					<input type="text" id="kwd" name="searchText" value="${searchText }"> 
+					action="${pageContext.request.contextPath }/board?page=1" method="post">
+					<input type="text" id="kwd" name="kwd" value="${searchText }"> 
 					<input type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
@@ -32,7 +32,7 @@
 						<c:set var="count" value="${fn:length(list) }" />
 						<c:forEach items="${list }" var="vo" varStatus="status">
 
-						<c:if test="${count-10*(page-1) >=count-status.index&&count-10*(page+1)<=count-status.index}">
+						<c:if test="${count-10*(page-1) >=count-status.index&&count-10*page+1<=count-status.index}">
 									<tr>
 										<td>${count-status.index }</td>
 										
@@ -59,14 +59,14 @@
 					<ul>
 					<li>
 					<c:if test="${page>1 }">
-					<a href="${pageContext.request.contextPath }/board?page=${page-1}">◀</a></c:if>
+					<a href="${pageContext.request.contextPath }/board?page=${page-1}&kwd=${searchText}">◀</a></c:if>
 					</li>
 						<c:forEach var="i" begin="1" end="${count/10 +1}" step="1">
-							<li><a href="${pageContext.request.contextPath }/board?page=${i}">${i }</a></li>
+							<li><a href="${pageContext.request.contextPath }/board?page=${i}&kwd=${searchText}">${i }</a></li>
 						</c:forEach>
 						<li>
 						<c:if test="${page<count/10}">
-						<a href="${pageContext.request.contextPath }/board?page=${page+1}">▶</a></c:if>
+						<a href="${pageContext.request.contextPath }/board?page=${page+1}&kwd=${searchText}">▶</a></c:if>
 						</li>
 	
 					</ul>
