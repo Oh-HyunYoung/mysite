@@ -27,7 +27,6 @@ public class ModifyformAction implements Action {
 		BoardVo svo = new BoardDao().findByNo(no);
 		request.setAttribute("vo", svo);
 
-		
 		MvcUtil.forward("board/modify", request, response);
 	}
 }

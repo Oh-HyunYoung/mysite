@@ -406,12 +406,12 @@ public class BoardDao {
 		Connection conn = null;
 		ResultSet rs = null;
 
-		String sql ="select b.no, b.title, b.contents, u.name, b.hit, b.reg_date, b.g_no, b.o_no, b.depth, b.user_no from board b, user u where b.user_no = u.no";
+		String sql ="select b.no, b.title, b.contents, u.name, b.hit, b.reg_date, b.g_no, b.o_no, b.depth, b.user_no from board b, user u where title";
 		try {
 			conn = getConnection();
 			
 			if(text != null && !text.equals("")) {
-				sql +="LIKE '%"+text.trim()+"%' order by g_no desc, o_no asc";
+				sql +=" LIKE '%"+text.trim()+"%' order by g_no desc, o_no asc";
 
 			}
 			

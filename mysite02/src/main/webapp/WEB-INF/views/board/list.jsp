@@ -16,7 +16,7 @@
 			<div id="board">
 				<form id="search_form"
 					action="" method="post">
-					<input type="text" id="kwd" name="kwd" value="${kwd }"> 
+					<input type="text" id="kwd" name="searchText" value="${searchText }"> 
 					<input type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
@@ -32,7 +32,7 @@
 						<c:set var="count" value="${fn:length(list) }" />
 						<c:forEach items="${list }" var="vo" varStatus="status">
 
-						<c:if test="${count-5*(page-1) >=count-status.index&&count-5*(page+1)<=count-status.index}">
+						<c:if test="${count-10*(page-1) >=count-status.index&&count-10*(page+1)<=count-status.index}">
 									<tr>
 										<td>${count-status.index }</td>
 										
@@ -53,7 +53,7 @@
 						</c:forEach>
 						</table>
 				</table>
-
+	
 				<!-- pager 추가 -->
 				<div class="pager">
 					<ul>
@@ -61,21 +61,14 @@
 					<c:if test="${page>1 }">
 					<a href="${pageContext.request.contextPath }/board?page=${page-1}">◀</a></c:if>
 					</li>
-						<c:forEach var="i" begin="1" end="${count/5 +1}" step="1">
+						<c:forEach var="i" begin="1" end="${count/10 +1}" step="1">
 							<li><a href="${pageContext.request.contextPath }/board?page=${i}">${i }</a></li>
 						</c:forEach>
 						<li>
-						<c:if test="${page<count/5}">
+						<c:if test="${page<count/10}">
 						<a href="${pageContext.request.contextPath }/board?page=${page+1}">▶</a></c:if>
 						</li>
-					<!-- 	<li><a href="">◀</a></li>
-						<li><a href="${pageContext.request.contextPath }/board/page=${i}">1</a></li>
-						<li class="selected">2</li>
-						<li><a href="">3</a></li>
-						<li>4</li>
-						<li>5</li>
-						<li><a href="">▶</a></li>
-						 -->
+	
 					</ul>
 				</div>
 				<!-- pager 추가 -->
