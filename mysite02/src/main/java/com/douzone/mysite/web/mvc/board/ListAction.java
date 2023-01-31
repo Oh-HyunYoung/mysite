@@ -25,6 +25,7 @@ public class ListAction implements Action {
 		request.setAttribute("page", page);
 		request.setAttribute("kwd", search);
 		MvcUtil.forward("board/list",request,response);
+		System.out.println(search);
 	}
 
 }

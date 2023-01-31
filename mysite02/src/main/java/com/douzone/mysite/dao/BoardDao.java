@@ -406,12 +406,12 @@ public class BoardDao {
 		Connection conn = null;
 		ResultSet rs = null;
 
-		String sql ="select * from board where title ";
+		String sql ="select b.no, b.title, b.contents, u.name, b.hit, b.reg_date, b.g_no, b.o_no, b.depth, b.user_no from board b, user u where b.user_no = u.no";
 		try {
 			conn = getConnection();
 			
 			if(text != null && !text.equals("")) {
-				sql +="like '%"+text.trim()+"%' order by g_no desc, o_no asc";
+				sql +="LIKE '%"+text.trim()+"%' order by g_no desc, o_no asc";
 
 			}
 			
@@ -424,16 +424,18 @@ public class BoardDao {
 				Long no = rs.getLong(1);
 				String title = rs.getString(2);
 				String contents = rs.getString(3);
-				Long hit = rs.getLong(4);
-				String reg_date = rs.getString(5);
-				Long group_no = rs.getLong(6);
-				Long order_no = rs.getLong(7);
-				Long depth = rs.getLong(8);
-				Long user_no = rs.getLong(9);
+				String name = rs.getString(4);
+				Long hit = rs.getLong(5);
+				String reg_date = rs.getString(6);
+				Long group_no = rs.getLong(7);
+				Long order_no = rs.getLong(8);
+				Long depth = rs.getLong(9);
+				Long user_no = rs.getLong(10);
 
 				vo.setNo(no);
 				vo.setTitle(title);
 				vo.setContents(contents);
+				vo.setName(name);
 				vo.setHit(hit);
 				vo.setReg_date(reg_date);
 				vo.setGroup_no(group_no);
