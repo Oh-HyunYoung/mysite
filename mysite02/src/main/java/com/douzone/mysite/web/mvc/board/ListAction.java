@@ -16,9 +16,14 @@ public class ListAction implements Action {
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String page = request.getParameter("page");
+		String text = request.getParameter("searchText");
+		
 		List<BoardVo> list = new BoardDao().findAll();
+		List<BoardVo> search = new BoardDao().searchList(text);
+		
 		request.setAttribute("list", list);
 		request.setAttribute("page", page);
+		request.setAttribute("kwd", search);
 		MvcUtil.forward("board/list",request,response);
 	}
 

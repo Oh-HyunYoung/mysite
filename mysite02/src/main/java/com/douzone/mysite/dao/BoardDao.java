@@ -169,7 +169,7 @@ public class BoardDao {
 	public void updatehit(Long no) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-//		BoardVo vo = new BoardVo();
+
 		try {
 			conn = getConnection();
 
@@ -400,6 +400,69 @@ public class BoardDao {
 		return result;
 
 	}
+	
+	public List<BoardVo> searchList(String text) {
+		List<BoardVo> search = new ArrayList<BoardVo>();
+		Connection conn = null;
+//		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql ="select * from board where title ";
+		try {
+			conn = getConnection();
+			
+			if(text != null && !text.equals("")) {
+				sql +="like '%"+text.trim()+"%' order by g_no desc, o_no asc";
+
+			}
+			
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				BoardVo vo = new BoardVo();
+				
+				Long no = rs.getLong(1);
+				String title = rs.getString(2);
+				String contents = rs.getString(3);
+				Long hit = rs.getLong(4);
+				String reg_date = rs.getString(5);
+				Long group_no = rs.getLong(6);
+				Long order_no = rs.getLong(7);
+				Long depth = rs.getLong(8);
+				Long user_no = rs.getLong(9);
+
+				vo.setNo(no);
+				vo.setTitle(title);
+				vo.setContents(contents);
+				vo.setHit(hit);
+				vo.setReg_date(reg_date);
+				vo.setGroup_no(group_no);
+				vo.setOrder_no(order_no+1);
+				vo.setDepth(depth);
+				vo.setUser_no(user_no);
+
+				search.add(vo);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Error:" + e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return search;
+
+	}
 
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
@@ -413,4 +476,6 @@ public class BoardDao {
 		}
 		return conn;
 	}
+
+
 }
