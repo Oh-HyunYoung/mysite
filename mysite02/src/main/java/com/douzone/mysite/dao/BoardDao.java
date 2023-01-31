@@ -404,7 +404,6 @@ public class BoardDao {
 	public List<BoardVo> searchList(String text) {
 		List<BoardVo> search = new ArrayList<BoardVo>();
 		Connection conn = null;
-//		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		String sql ="select * from board where title ";
@@ -438,7 +437,7 @@ public class BoardDao {
 				vo.setHit(hit);
 				vo.setReg_date(reg_date);
 				vo.setGroup_no(group_no);
-				vo.setOrder_no(order_no+1);
+				vo.setOrder_no(order_no);
 				vo.setDepth(depth);
 				vo.setUser_no(user_no);
 
