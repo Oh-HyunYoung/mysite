@@ -21,8 +21,8 @@ public class GuestbookController{
 	
 	@RequestMapping("")
 	public String list(Model model) {
-		List<GuestbookVo> gv = guestbookService.getMessageList();
-		model.addAttribute("gv", gv);
+		List<GuestbookVo> list = guestbookService.getMessageList();
+		model.addAttribute("list", list);
 		
 		return "guestbook/list";
 	}
@@ -47,22 +47,7 @@ public class GuestbookController{
 
 			return "redirect:/guestbook";
 		}
-		
-//		session.setAttribute("authUser",authUser);
-//		return "redirect:/";
-//	}
 
-	
-//	@RequestMapping(value="/insert", method=RequestMethod.GET)
-//	public String insert() {
-//		return "guestbook/list";
-//	}
-//	
-//	@RequestMapping(value="/join", method=RequestMethod.POST)
-//	public String insert(GuestbookVo vo) {
-//		guestbookService.addMessage(vo);
-//		return "redirect:/guestbook/list";
-//	}
 	
 	
 }
