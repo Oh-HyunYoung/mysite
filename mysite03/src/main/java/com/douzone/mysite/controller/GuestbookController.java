@@ -30,9 +30,7 @@ public class GuestbookController{
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	public String insert(GuestbookVo vo) {
-		System.out.println(vo);
 		guestbookService.addMessage(vo);
-		System.out.println(vo);
 		return "redirect:/guestbook";
 		
 	}	

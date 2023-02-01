@@ -18,11 +18,16 @@ public class BoardService {
 	@Autowired
 	private BoardRepository boardRepository;
 	
+	public List<BoardVo> getList() {
+		return boardRepository.findAll();
+	}
+	
 	public void addContents(BoardVo vo) {
+		boardRepository.insertByContent(vo);
 	}
 	
 	public BoardVo getContents(Long no) {
-		return null;
+		return boardRepository.findByNo(no);
 	}
 	
 	public BoardVo getContents(Long no, Long UserNo) {
@@ -36,25 +41,28 @@ public class BoardService {
 
 	}
 
-	public Map<String, Object> getContentsList(int page, String keyword) {
-		int toTalCount = boardRepository.getTotalCount(keyword);  
-		
-		
-		// 1. view에서 게시판 리스트를 렌더링 하기 위한 데이터 값 계산
-		int beginPage = 0;
-		int prevPage = 0;
-		int nextPage = 0;
-		int endPage = 0;
-		
-		// 2. 리스트 가져오기
-		List<BoardVo> list = boardRepository.findAllByPageAndKeyWord(page,keyword, LIST_SIZE);
-		
-		// 3. 리스트 정보를 맵에 저장
-		Map<String,Object> map = new HashMap<>();
-		map.put("list", list);
-		map.put("beginPage", beginPage);
-		//..
-		//..
-		return map;
-	}
+
+
+//	public Map<String, Object> getContentsList(int page, String keyword) {
+//		int toTalCount = boardRepository.getTotalCount(keyword);  
+//		
+//		
+//		// 1. view에서 게시판 리스트를 렌더링 하기 위한 데이터 값 계산
+//		int beginPage = 0;
+//		int prevPage = 0;
+//		int nextPage = 0;
+//		int endPage = 0;
+//		
+//		// 2. 리스트 가져오기
+//		List<BoardVo> list = boardRepository.findAllByPageAndKeyWord(page,keyword, LIST_SIZE);
+//		
+//		// 3. 리스트 정보를 맵에 저장
+//		Map<String,Object> map = new HashMap<>();
+//		map.put("list", list);
+//		map.put("beginPage", beginPage);
+//		map.put("prevPage", prevPage);
+//		map.put("nextPage", nextPage);
+//		map.put("endPage", endPage);
+//		return map;
+//	}
 }

@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
-	<select id ="findAllByPageAndKeyWord" parameterType="map">
-		<choose>
-			<when test='keyword == null or'>
-			</when>
-		</choose>
 	
+ 	<resultMap id="findAllList" type="boardvo" >
+ 		<id property="no" column="no" />
+ 		<result property="title" column="title" />
+ 		<result property="contents" column="contents" />
+ 		<result property="name" column="name" />
+ 		<result property="hit" column="hit" />
+ 		<result property="reg_date" column="reg_date" />
+ 		<result property="group_no" column="g_no" />
+ 		<result property="order_no" column="o_no" />
+ 		<result property="depth" column="depth" />
+ 		<result property="user_no" column="user_no" />
+ 	</resultMap>
+ 
+
+	<select id ="findAllByPageAndKeyWord" parameterType="map">
 		<![CDATA[
 		select *
 			from board	
@@ -19,17 +29,54 @@
 	<select id ="getTotalCount" parameterType="string" resultType="integer">
 		<choose>
 			<when test='_parameter == null or _parameter == ""'>
+				<![CDATA[
 				select count(*)
 					from board	
+				]]>
 			</when>
 			<otherwise>
+				<![CDATA[
 				select count(*)
 					from board	
 				 where title like '%${_parameter }%'
 				   or contents like '%${_parameter }%'
+				]]>
 			</otherwise>
 		</choose>
-		
-	
 	</select>
+	
+	<select id="insertByContent" parameterType="boardvo">
+		<![CDATA[
+		insert 
+		  into board(no,title,contents,reg_date) 
+		values(null, #{title }, #{contents }, now())
+		]]>
+	</select>
+	
+	<select id="findAll" resultMap="findAllList">
+ 		<![CDATA[
+ 			select b.no, b.title, b.contents, u.name, b.hit, b.reg_date, b.g_no as group_no, b.o_no as order_no, b.depth, b.user_no 
+ 			 from board b, user u 
+ 			where b.user_no = u.no 
+ 			order by g_no desc, o_no asc
+ 		]]>
+ 	</select>
+ 	
+ 	<select id="findByNo" resultType="boardvo">
+ 		<![CDATA[
+ 			select * 
+ 			  from board 
+ 			 where no=#{no }
+ 		]]>
+ 	</select>
+ 	
+ 	<delete id="deleteByNo" parameterType="long">
+ 		<![CDATA[
+ 		delete 
+ 		 from board 
+ 		  where no = #{no }
+ 		]]>
+ 	</delete>
+ 	
+ 	
 </mapper>

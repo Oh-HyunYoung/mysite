@@ -16,17 +16,33 @@ public class BoardRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<BoardVo> findAllByPageAndKeyWord(int page, String keyword, int size) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("startOffset", (page-1)*size);
-		map.put("page", size);
-		map.put("keyword", "%"+keyword+"%");
-		
-		return sqlSession.selectList("board.findAllByPageAndKeyWord", map);
-	}
+//	public List<BoardVo> findAllByPageAndKeyWord(int page, String keyword, int size) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("startOffset", (page-1)*size);
+//		map.put("size", size);
+//		map.put("keyword", keyword);
+//		
+//		return sqlSession.selectList("board.findAllByPageAndKeyWord", map);
+//	}
 
 	public int getTotalCount(String keyword) {
 		return sqlSession.selectOne("board.getTotalCount", keyword);
-		}
+	}
+	
+	public void insertByContent(BoardVo vo) {
+		sqlSession.insert("board.insertByContent",vo);
+	}
 
+	public List<BoardVo> findAll(){
+		return sqlSession.selectList("board.findAll");
+	}
+	
+//	public void deleteByNo(Long no) {
+//		sqlSession.delete("board.deleteByNo",no);
+//	}
+//
+	public BoardVo findByNo(Long no) {
+		return sqlSession.selectOne("no",no);
+	}
+	
 }
