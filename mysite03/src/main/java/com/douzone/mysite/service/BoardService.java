@@ -35,6 +35,7 @@ public class BoardService {
 	}
 	
 	public void updateContents(BoardVo vo) {
+		boardRepository.updateByContents(vo);
 	}
 	
 	public void deleteContents(Long no, Long userNo) {

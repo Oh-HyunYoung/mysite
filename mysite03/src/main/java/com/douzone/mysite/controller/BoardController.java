@@ -40,18 +40,24 @@ public class BoardController{
 	
 	@RequestMapping(value="/view/{no}", method=RequestMethod.GET)
 	public String view(@PathVariable("no") Long no, Model model) {
-		model.addAttribute("no",no);
-		System.out.println("get"+no);
+		BoardVo boardvo = boardService.getContents(no);
+		model.addAttribute("boardvo",boardvo);
 		return "board/view";
 	}
 	
-	@RequestMapping(value="/view/{no}", method=RequestMethod.POST)
-	public String view(@PathVariable("no") Long no) {
-		boardService.getContents(no);
-		System.out.println("post"+no);
-		return "redirect:/board";
+	@RequestMapping(value="/modify/{no}", method=RequestMethod.GET)
+	public String modify(@PathVariable("no") Long no, Model model, BoardVo vo) {
+		model.addAttribute("no",no);
+		System.out.println("get"+no);
+		return "board/modify";
 	}
 	
+	@RequestMapping(value="/write",method=RequestMethod.POST)
+	public String modify(BoardVo vo) {
+		boardService.updateContents(vo);
+		return "redirect:/board";
+		
+	}
 	
 //	@RequestMapping(value="/write",method=RequestMethod.POST)
 //	public String insert(BoardVo vo) {

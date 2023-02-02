@@ -70,6 +70,22 @@
  		]]>
  	</select>
  	
+ 	<update id="updatehit" parameterType="boardvo">
+ 		<![CDATA[
+ 			update board 
+ 			set hit = hit+1 
+ 			where no=#{no }
+ 		]]>
+ 	</update>
+ 	
+ 	 	<update id="updateByContents" parameterType="boardvo">
+ 		<![CDATA[
+ 			update board 
+ 			set title = #{title }, contents = #{contents} 
+ 			where no= #{no }
+ 		]]>
+ 	</update>
+ 	
  	<delete id="deleteByNo"  parameterType="long">
  		<![CDATA[
  		delete 

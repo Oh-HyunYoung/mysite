@@ -21,20 +21,20 @@
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td>${vo.title }</td>
+						<td>${boardvo.title }</td>
 					<tr>
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-								${fn:replace(vo.contents, newline, "<br>") }
+								${fn:replace(boardvo.contents, newline, "<br>") }
 							</div>
 						</td>
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board?a=write&no=${vo.no}">답글</a>
-					<a href="${pageContext.request.contextPath }/board?a=list">글목록</a>
-					<a href="${pageContext.request.contextPath }/board?a=modify&no=${vo.no}">글수정</a>
+					<a href="${pageContext.request.contextPath }/board/write/${vo.no}">답글</a>
+					<a href="${pageContext.request.contextPath }/board/list">글목록</a>
+					<a href="${pageContext.request.contextPath }/board/modify/${vo.no}">글수정</a>
 				</div>
 			</div>
 		</div>

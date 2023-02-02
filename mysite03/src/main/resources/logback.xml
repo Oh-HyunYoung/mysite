@@ -31,8 +31,8 @@
 		<appender-ref ref="fileAppender" />
 		<appender-ref ref="consoleAppender" />
 	</logger>
-	<!-- 루트(글로벌) 로거 -->
-	<root level="debug">
+	
+	<root level="warn">
 		<appender-ref ref="consoleAppender" />
 	</root>
 </configuration>

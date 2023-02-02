@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.mysite.vo.BoardVo;
+import com.douzone.mysite.vo.UserVo;
 
 @Repository
 public class BoardRepository {
@@ -42,7 +43,11 @@ public class BoardRepository {
 //	}
 //
 	public BoardVo findByNo(Long no) {
-		return sqlSession.selectOne("no",no);
+		return sqlSession.selectOne("board.findByNo",no);
+	}
+	
+	public void updateByContents(BoardVo vo) {
+		sqlSession.selectOne("board.updateByContents",vo);
 	}
 	
 }
