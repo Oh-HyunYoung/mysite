@@ -32,9 +32,9 @@
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board/write/${vo.no}">답글</a>
-					<a href="${pageContext.request.contextPath }/board/list">글목록</a>
-					<a href="${pageContext.request.contextPath }/board/modify/${vo.no}">글수정</a>
+					<a href="${pageContext.request.contextPath }/board/write/${no}">답글</a>
+					<a href="${pageContext.request.contextPath }/board">글목록</a>
+					<a href="${pageContext.request.contextPath }/board/modify/${no}">글수정</a>
 				</div>
 			</div>
 		</div>

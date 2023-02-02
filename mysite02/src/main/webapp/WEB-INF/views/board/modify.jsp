@@ -15,7 +15,7 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"/>
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board">
+				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board?page=1">
 					<input type="hidden" value="modify" name="a">
 					<input type="hidden" value=${vo.no } name="no">
 					<table class="tbl-ex">
@@ -32,22 +32,22 @@
 								<textarea id="content" name="content">${vo.contents }</textarea>
 							</td>
 						</tr>
+					</table>
 					<c:choose>
 							<c:when test='${not empty sessionScope.authUser.no }'>
 					<div class="bottom">
-						<a href="${pageContext.servletContext.contextPath }/board">취소</a>
+						<a href="${pageContext.servletContext.contextPath }/board?page=1">취소</a>
 						<input type="submit" value="수정">
 					</div>
 					</c:when>
 					<c:otherwise>
 					<p>
 					<div class="bottom">
-						<a href="${pageContext.servletContext.contextPath }/board">취소</a>
+						<a href="${pageContext.servletContext.contextPath }/board?page=1">취소</a>
 						<p> 회원만 수정 가능합니다. 로그인 해주세요. </p>
 					</div>
 					</c:otherwise>
 					</c:choose>
-					</table>
 				</form>				
 			</div>
 		</div>

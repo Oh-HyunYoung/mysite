@@ -9,12 +9,12 @@
  		<result property="name" column="name" />
  		<result property="hit" column="hit" />
  		<result property="reg_date" column="reg_date" />
- 		<result property="group_no" column="g_no" />
- 		<result property="order_no" column="o_no" />
+ 		<result property="g_no" column="g_no" />
+ 		<result property="o_no" column="o_no" />
  		<result property="depth" column="depth" />
  		<result property="user_no" column="user_no" />
  	</resultMap>
- 
+
 
 	<select id ="findAllByPageAndKeyWord" parameterType="map">
 		<![CDATA[
@@ -45,17 +45,24 @@
 		</choose>
 	</select>
 	
-	<select id="insertByContent" parameterType="boardvo">
+	<insert id="insertByContent" parameterType="boardvo">
 		<![CDATA[
 		insert 
-		  into board(no,title,contents,reg_date) 
-		values(null, #{title }, #{contents }, now())
+		 into board 
+		values(null, #{title }, #{contents }, 0, now(), #{g_no}, #{o_no}, #{depth}, #{user_no })
+		]]>
+	</insert>
+	
+	<select id="maxgno" resultType="long" >
+		<![CDATA[
+		select max(g_no) 
+		 from board
 		]]>
 	</select>
 	
 	<select id="findAll" resultMap="findAllList">
  		<![CDATA[
- 			select b.no, b.title, b.contents, u.name, b.hit, b.reg_date, b.g_no as group_no, b.o_no as order_no, b.depth, b.user_no 
+ 			select b.no, b.title, b.contents, u.name, b.hit, b.reg_date, b.g_no as g_no, b.o_no as o_no, b.depth as depth, b.user_no 
  			 from board b, user u 
  			where b.user_no = u.no 
  			order by g_no desc, o_no asc
@@ -64,7 +71,7 @@
  	
  	<select id="findByNo" resultType="boardvo"  parameterType="long">
  		<![CDATA[
- 			select *
+ 			select no, title, contents, hit, reg_date,g_no, o_no, depth, user_no
  			  from board 
  			 where no=#{no }
  		]]>
@@ -78,11 +85,23 @@
  		]]>
  	</update>
  	
- 	 	<update id="updateByContents" parameterType="boardvo">
+ 	 <update id="updateByContents" parameterType="boardvo">
  		<![CDATA[
  			update board 
- 			set title = #{title }, contents = #{contents} 
+ 			set title = #{title }, contents = #{contents } 
  			where no= #{no }
+ 		]]>
+ 	</update>
+ 	
+ 	<select id="selectNo" parameterType="map" resultType="boardvo">
+ 		<![CDATA[
+ 			select * from board where g_no =#{gno } and o_no > #{ono }
+ 		]]>
+ 	</select>
+ 	
+ 	<update id="updateNo" parameterType="boardvo">
+ 		<![CDATA[
+ 			update board set o_no = #{o_no } where no=#{no } 
  		]]>
  	</update>
  	

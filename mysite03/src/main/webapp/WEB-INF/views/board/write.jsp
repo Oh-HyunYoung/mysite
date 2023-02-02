@@ -18,10 +18,8 @@
 		<div id="content">
 			<div id="board">
 			
-				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board">
-					<input type = "hidden" name = "a" value="write">
-					<input type = "hidden" name = "userNo" value="${sessionScope.authUser.no }">
-					<input type = "hidden" name = "no" value="${no }">
+				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board/write">
+				<input type="hidden" id="no" name="no" value="${no }">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>
@@ -33,25 +31,16 @@
 						<tr>
 							<td class="label">내용</td>
 							<td>
-								<textarea id="content" name="content"></textarea>
+								<textarea id="content" name="contents"></textarea>
 							</td>
 						</tr>
 					</table>
-					<c:choose>
-							<c:when test='${not empty sessionScope.authUser.no }'>
+					
 					<div class="bottom">
 						<a href="${pageContext.servletContext.contextPath }/board">취소</a>
 						<input type="submit" value="등록">
 					</div>
-					</c:when>
-					<c:otherwise>
-					<p>
-					<div class="bottom">
-						<a href="${pageContext.servletContext.contextPath }/board">취소</a>
-						<p> 회원만 작성 가능합니다. 로그인 해주세요. </p>
-					</div>
-					</c:otherwise>
-					</c:choose>
+				
 				</form>
 				<c:set var="count" value="${fn:length(list) }" />
 		<c:forEach items="${list }" var ="vo" varStatus="status">

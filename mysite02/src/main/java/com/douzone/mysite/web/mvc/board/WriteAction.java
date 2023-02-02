@@ -23,17 +23,20 @@ public class WriteAction implements Action {
 		
 		
 		BoardVo vo = new BoardVo();
+		// 게시글
 		if (no==-1) {
 			vo.setGroup_no(new BoardDao().maxgno()+1);
 			vo.setOrder_no(1L);
 			vo.setDepth(0L);
 		}
+		// 댓글
 		else {
 			vo=new BoardDao().findByNo(no);
 			new BoardDao().updateNo(vo.getGroup_no(),vo.getOrder_no());
 			vo.setOrder_no(vo.getOrder_no()+1);
 			vo.setDepth(vo.getDepth()+1);
 		}
+		
 		vo.setTitle(title);
 		vo.setContents(contents);
 		vo.setUser_no(user);

@@ -11,7 +11,7 @@
  	
  	<select id="findAll" resultMap="findAllList">
  		<![CDATA[
- 			select no, name, message, reg_date as regDate
+ 			select no, name, message, reg_date
 				from guestbook
 			order by reg_date desc
  		]]>

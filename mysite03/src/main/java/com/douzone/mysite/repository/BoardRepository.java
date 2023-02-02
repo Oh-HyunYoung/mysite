@@ -38,16 +38,30 @@ public class BoardRepository {
 		return sqlSession.selectList("board.findAll");
 	}
 	
-//	public void deleteByNo(Long no) {
-//		sqlSession.delete("board.deleteByNo",no);
-//	}
-//
+	public void deleteByNo(Long no) {
+		sqlSession.delete("board.deleteByNo",no);
+	}
+
 	public BoardVo findByNo(Long no) {
 		return sqlSession.selectOne("board.findByNo",no);
 	}
 	
 	public void updateByContents(BoardVo vo) {
 		sqlSession.selectOne("board.updateByContents",vo);
+	}
+
+	public Long maxgno() {
+		return sqlSession.selectOne("board.maxgno");
+	}
+	
+	public void updateNo(Long gno, Long ono) {
+		Map<String,Long> map = Map.of("gno",gno,"ono",ono);
+		List<BoardVo> list = sqlSession.selectList("board.selectNo",map);
+		System.out.println("list: "+ list);
+		for(BoardVo vo:list) {
+			vo.setO_no(vo.getO_no()+1);
+			sqlSession.selectOne("board.updateNo",vo);
+		}
 	}
 	
 }

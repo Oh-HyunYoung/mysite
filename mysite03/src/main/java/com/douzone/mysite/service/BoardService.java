@@ -38,8 +38,16 @@ public class BoardService {
 		boardRepository.updateByContents(vo);
 	}
 	
-	public void deleteContents(Long no, Long userNo) {
+	public void deleteContents(Long no) {
+		boardRepository.deleteByNo(no);
+	}
 
+	public Long maxgno() {
+		return boardRepository.maxgno();
+	}
+	
+	public void updateNo(Long gno,Long ono) {
+		boardRepository.updateNo(gno, ono);
 	}
 
 

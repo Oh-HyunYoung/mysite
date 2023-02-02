@@ -6,8 +6,8 @@ public class BoardVo {
 	private String contents;
 	private Long hit;
 	private String reg_date;
-	private Long group_no;
-	private Long order_no;
+	private Long g_no;
+	private Long o_no;
 	private Long depth;
 	private Long user_no;
 	private String name;
@@ -49,18 +49,7 @@ public class BoardVo {
 	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
-	public Long getGroup_no() {
-		return group_no;
-	}
-	public void setGroup_no(Long group_no) {
-		this.group_no = group_no;
-	}
-	public Long getOrder_no() {
-		return order_no;
-	}
-	public void setOrder_no(Long order_no) {
-		this.order_no = order_no;
-	}
+
 	public Long getDepth() {
 		return depth;
 	}
@@ -73,12 +62,26 @@ public class BoardVo {
 	public void setUser_no(Long user_no) {
 		this.user_no = user_no;
 	}
+	public Long getG_no() {
+		return g_no;
+	}
+	public void setG_no(Long g_no) {
+		this.g_no = g_no;
+	}
+	public Long getO_no() {
+		return o_no;
+	}
+	public void setO_no(Long o_no) {
+		this.o_no = o_no;
+	}
 	@Override
 	public String toString() {
 		return "BoardVo [no=" + no + ", title=" + title + ", contents=" + contents + ", hit=" + hit + ", reg_date="
-				+ reg_date + ", group_no=" + group_no + ", order_no=" + order_no + ", depth=" + depth + ", user_no="
-				+ user_no + ", name=" + name + "]";
+				+ reg_date + ", g_no=" + g_no + ", o_no=" + o_no + ", depth=" + depth + ", user_no=" + user_no
+				+ ", name=" + name + "]";
 	}
+
+	
 
 	
 

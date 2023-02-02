@@ -72,8 +72,7 @@
 				<!-- pager 추가 -->
 
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board/write&no=-1"
-						id="new-book">글쓰기</a>
+					<a href="${pageContext.request.contextPath }/board/write/-1" id="new-book">글쓰기</a>
 				</div>
 			</div>
 		</div>
