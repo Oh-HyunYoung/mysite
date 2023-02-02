@@ -62,15 +62,15 @@
  		]]>
  	</select>
  	
- 	<select id="findByNo" resultType="boardvo">
+ 	<select id="findByNo" resultType="boardvo"  parameterType="long">
  		<![CDATA[
- 			select * 
+ 			select *
  			  from board 
  			 where no=#{no }
  		]]>
  	</select>
  	
- 	<delete id="deleteByNo" parameterType="long">
+ 	<delete id="deleteByNo"  parameterType="long">
  		<![CDATA[
  		delete 
  		 from board 
