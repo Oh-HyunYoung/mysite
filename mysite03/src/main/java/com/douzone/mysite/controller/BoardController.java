@@ -32,6 +32,7 @@ public class BoardController{
 //	
 //		return "board/index";
 //	}
+	
 	@RequestMapping("")
 	public String index(Model model) {
 		List<BoardVo> index = boardService.getList();
@@ -89,8 +90,7 @@ public class BoardController{
 			vo.setO_no(vos.getO_no()+1);
 			vo.setDepth(vos.getDepth()+1);
 		}
-		
-		
+
 		UserVo authuser = (UserVo)session.getAttribute("authUser");
 		vo.setUser_no(authuser.getNo());
 		boardService.addContents(vo);
