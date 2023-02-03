@@ -69,20 +69,21 @@ public class BoardController{
 	@RequestMapping(value="/write/{no}", method=RequestMethod.GET)
 	public String write(@PathVariable("no") Long no, Model model) {
 		model.addAttribute("number",no);
-		System.out.println("no: "+no);
+		System.out.println("number: "+ no);
 		return "board/write";
 	}
 	
 	@RequestMapping(value="/write",method=RequestMethod.POST)
 	public String write(BoardVo vo, HttpSession session,Long no) {
-		System.out.println("no2: "+no);
+		System.out.println("vo: "+vo);
 		if(no == -1) {
+			System.out.println("vo -1 : "+ vo);
 			vo.setG_no(boardService.maxgno()+1);
 			vo.setO_no(1L);
 			vo.setDepth(0L);
 		} else {
 			BoardVo vos = boardService.getContents(no);
-			System.out.println("vos : "+vos);
+			System.out.println("else : "+ vos);
 			boardService.updateNo(vos.getG_no(), vos.getO_no());
 			vo.setG_no(vos.getG_no());
 			vo.setO_no(vos.getO_no()+1);
@@ -91,12 +92,9 @@ public class BoardController{
 		
 		
 		UserVo authuser = (UserVo)session.getAttribute("authUser");
-		System.out.println("authuser : "+authuser);
-		System.out.println("post"+vo);
 		vo.setUser_no(authuser.getNo());
 		boardService.addContents(vo);
 		
-		return "redirect:/board";
-//		
+		return "redirect:/board";	
 	}	
 }

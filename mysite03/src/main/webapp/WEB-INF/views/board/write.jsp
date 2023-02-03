@@ -36,11 +36,22 @@
 						</tr>
 					</table>
 					
+					
+<c:choose>
+							<c:when test='${not empty sessionScope.authUser.no }'>
 					<div class="bottom">
 						<a href="${pageContext.servletContext.contextPath }/board">취소</a>
 						<input type="submit" value="등록">
 					</div>
-				
+					</c:when>
+					<c:otherwise>
+					<p>
+					<div class="bottom">
+						<a href="${pageContext.servletContext.contextPath }/board">취소</a>
+						<p> 회원만 작성 가능합니다. 로그인 해주세요. </p>
+					</div>
+					</c:otherwise>
+					</c:choose>
 				</form>
 				<c:set var="count" value="${fn:length(list) }" />
 		<c:forEach items="${list }" var ="vo" varStatus="status">
