@@ -2,8 +2,6 @@ package com.douzone.mysite.controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.douzone.mysite.security.Auth;
+import com.douzone.mysite.security.AuthUser;
 import com.douzone.mysite.service.BoardService;
 import com.douzone.mysite.vo.BoardVo;
 import com.douzone.mysite.vo.UserVo;
@@ -49,35 +48,23 @@ public class BoardController {
 	
 	@RequestMapping("/delete/{no}")
 	public String delete(
-		HttpSession session,
+		@AuthUser UserVo authUser,
 		@PathVariable("no") Long boardNo,
 		@RequestParam(value="p", required=true, defaultValue="1") Integer page,
 		@RequestParam(value="kwd", required=true, defaultValue="") String keyword) {
 
-		// Access Control
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/";
-		}
-		//////////////////////////////////////////////////
-		
+	
 		boardService.deleteContents(boardNo, authUser.getNo());
 		return "redirect:/board?p=" + page + "&kwd=" + WebUtil.encodeURL(keyword, "UTF-8");
 	}
 	
+	@Auth
 	@RequestMapping("/modify/{no}")	
 	public String modify(
-		HttpSession session,	
+		@AuthUser UserVo authUser,	
 		@PathVariable("no") Long no,
 		Model model) {
-
-		// Access Control
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/";
-		}
-		//////////////////////////////////////////////////
-
+		
 		BoardVo boardVo = boardService.getContents(no, authUser.getNo());
 
 		model.addAttribute("boardVo", boardVo);
@@ -86,17 +73,10 @@ public class BoardController {
 
 	@RequestMapping(value="/modify", method=RequestMethod.POST)	
 	public String modify(
-		HttpSession session,
+		@AuthUser UserVo authUser,	
 		@ModelAttribute BoardVo boardVo,
 		@RequestParam(value="p", required=true, defaultValue="1") Integer page,
 		@RequestParam(value="kwd", required=true, defaultValue="") String keyword) {
-
-		// Access Control
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/";
-		}
-		//////////////////////////////////////////////////
 		
 		boardVo.setUserNo(authUser.getNo());
 		boardService.modifyContents(boardVo);
@@ -113,17 +93,11 @@ public class BoardController {
 
 	@RequestMapping(value="/write", method=RequestMethod.POST)	
 	public String write(
-		HttpSession session,	
+		@AuthUser UserVo authUser,	
 		@ModelAttribute BoardVo boardVo,
 		@RequestParam(value="p", required=true, defaultValue="1") Integer page,
 		@RequestParam(value="kwd", required=true, defaultValue="") String keyword) {
 	
-		// Access Control
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/";
-		}
-		//////////////////////////////////////////////////
 		
 		boardVo.setUserNo(authUser.getNo());
 		boardService.addContents(boardVo);
@@ -133,17 +107,10 @@ public class BoardController {
 
 	@RequestMapping(value="/reply/{no}")	
 	public String reply(
-		HttpSession session,
+		@AuthUser UserVo authUser,	
 		@PathVariable("no") Long no,
 		Model model) {
 		
-		// Access Control
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		if(authUser == null) {
-			return "redirect:/";
-		}
-		//////////////////////////////////////////////////
-
 		BoardVo boardVo = boardService.getContents(no);
 		boardVo.setOrderNo(boardVo.getOrderNo() + 1);
 		boardVo.setDepth(boardVo.getDepth() + 1);
