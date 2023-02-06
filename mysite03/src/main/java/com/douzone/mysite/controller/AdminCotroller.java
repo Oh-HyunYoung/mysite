@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.douzone.mysite.security.Auth;
+import com.douzone.mysite.security.AuthUser;
+import com.douzone.mysite.vo.UserVo;
 
 @Auth(role="ADMIN")
 @Controller
@@ -11,7 +13,8 @@ import com.douzone.mysite.security.Auth;
 public class AdminCotroller {
 	
 	@RequestMapping("")
-	public String main() {
+	public String main(@AuthUser UserVo authUser) {
+		
 		return "admin/main";
 	}
 

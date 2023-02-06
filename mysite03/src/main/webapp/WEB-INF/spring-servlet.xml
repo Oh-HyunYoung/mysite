@@ -61,6 +61,7 @@
 			<bean class="com.douzone.mysite.security.LogoutInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
+		<!-- 모든 경로에 대해 @Auth 어노테이션 실행 -->
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="/user/auth"/>
 			<mvc:exclude-mapping path="/user/logout"/>
