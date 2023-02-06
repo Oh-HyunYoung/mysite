@@ -9,59 +9,63 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.mysite.vo.BoardVo;
-import com.douzone.mysite.vo.UserVo;
 
 @Repository
 public class BoardRepository {
-	
-	@Autowired
-	private SqlSession sqlSession;
-	
-//	public List<BoardVo> findAllByPageAndKeyWord(int page, String keyword, int size) {
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("startOffset", (page-1)*size);
-//		map.put("size", size);
-//		map.put("keyword", keyword);
-//		
-//		return sqlSession.selectList("board.findAllByPageAndKeyWord", map);
-//	}
 
-	public int getTotalCount(String keyword) {
-		return sqlSession.selectOne("board.getTotalCount", keyword);
-	}
-	
-	public void insertByContent(BoardVo vo) {
-		sqlSession.insert("board.insertByContent",vo);
-	}
+    @Autowired
+    private SqlSession sqlSession;
 
-	public List<BoardVo> findAll(){
-		return sqlSession.selectList("board.findAll");
-	}
-	
-	public void deleteByNo(Long no) {
-		sqlSession.delete("board.deleteByNo",no);
-	}
+    public int insert(BoardVo boardVo) {
+        return sqlSession.insert("board.insert", boardVo);
+    }
 
-	public BoardVo findByNo(Long no) {
-		return sqlSession.selectOne("board.findByNo",no);
-	}
-	
-	public void updateByContents(BoardVo vo) {
-		sqlSession.selectOne("board.updateByContents",vo);
-	}
+    public List<BoardVo> findAllByPageAndKeword(String keyword, Integer page, Integer size) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("keyword", keyword);
+        map.put("startIndex", (page - 1) * size);
+        map.put("size", size);
 
-	public Long maxgno() {
-		return sqlSession.selectOne("board.maxgno");
-	}
-	
-	public void updateNo(Long gno, Long ono) {
-		Map<String,Long> map = Map.of("gno",gno,"ono",ono);
-		List<BoardVo> list = sqlSession.selectList("board.selectNo",map);
-		System.out.println("list: "+ list);
-		for(BoardVo vo:list) {
-			vo.setO_no(vo.getO_no()+1);
-			sqlSession.selectOne("board.updateNo",vo);
-		}
-	}
-	
+        return sqlSession.selectList("board.findAllByPageAndKeword", map);
+    }
+
+    public int update(BoardVo boardVo) {
+        return sqlSession.update("board.update", boardVo);
+    }
+
+    public int delete(Long no, Long userNo) {
+        Map<String, Long> map = new HashMap<String, Long>();
+        map.put("no", no);
+        map.put("userNo", userNo);
+
+        return sqlSession.delete("board.delete", map);
+    }
+
+    public BoardVo findByNo(Long no) {
+        return sqlSession.selectOne("board.findByNo", no);
+    }
+
+    public BoardVo findByNoAndUserNo(Long no, Long userNo) {
+        Map<String, Long> map = new HashMap<String, Long>();
+        map.put("no", no);
+        map.put("userNo", userNo);
+
+        return sqlSession.selectOne("board.findByNoAndUserNo", map);
+    }
+
+    public int updateHit(Long no) {
+        return sqlSession.update("board.updateHit", no);
+    }
+
+    public int updateOrderNo(Integer groupNo, Integer orderNo) {
+        Map<String, Integer> map = new HashMap<String, Integer>();
+        map.put("groupNo", groupNo);
+        map.put("orderNo", orderNo);
+
+        return sqlSession.update("board.updateOrederNo", map);
+    }
+
+    public int getTotalCount(String keyword) {
+        return sqlSession.selectOne("board.totalCount", keyword);
+    }
 }

@@ -35,7 +35,6 @@
 						<c:if test="${count-10*(page-1) >=count-status.index&&count-10*page+1<=count-status.index}">
 									<tr>
 										<td>${count-status.index }</td>
-										
 										<td style="text-align:left; padding-left:${vo.depth*15 }px">
 										<c:if test="${vo.depth>0 }">
 										<img src="${pageContext.request.contextPath }/assets/images/reply.png">
