@@ -10,7 +10,7 @@ import com.douzone.mysite.vo.UserVo;
 @Auth(role="ADMIN")
 @Controller
 @RequestMapping("/admin")
-public class AdminCotroller {
+public class AdminController {
 	
 	@RequestMapping("")
 	public String main(@AuthUser UserVo authUser) {
