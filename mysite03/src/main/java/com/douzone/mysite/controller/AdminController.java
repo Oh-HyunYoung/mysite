@@ -37,13 +37,14 @@ public class AdminController {
 	
 	@RequestMapping(value = "/main/update", method=RequestMethod.POST)
 	public String update(SiteVo vo,
-			@RequestParam("file") MultipartFile file,
-			Model model) {
+			@RequestParam("file") MultipartFile file) {
+		String profile = fileuploadService.restore(file);
+		if(profile != null) {
+			vo.setProfile(profile);
+		}
 		
-		String url = fileuploadService.restore(file);
-		model.addAttribute("url", url);
-		vo.setProfile(url);
 		siteService.updateSite(vo);
+//		servletContext.setAttribute("sitevo", vo);
 		return "redirect:/admin";
 	}
 	
