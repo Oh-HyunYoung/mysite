@@ -30,10 +30,10 @@ public class WebConfig implements WebMvcConfigurer {
 	}
 	
 	// Site Inteceptor
-		@Bean
-		public HandlerInterceptor siteInterceptor() {
-			return new SiteInterceptor();
-		}
+	@Bean
+	public HandlerInterceptor siteInterceptor() {
+		return new SiteInterceptor();
+	}
 
 	// Security Interceptors
 	@Bean

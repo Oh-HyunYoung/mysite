@@ -71,7 +71,7 @@ logging:
          max-history: 10
    file: /${spring.application.name}-logs/exception.log
    level: 
-      root: INFO
+      root: WARN
       com:
          douzone:
             mysite:
