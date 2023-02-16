@@ -15,17 +15,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.douzone.mysite.exception.FileuploadServiceException;
 
 @Service
-@PropertySource("classpath:com/douzone/mysite/web/fileupload.properties")
 public class FileuploadService {
-	
-	@Autowired
-	private Environment env;
-
+	private final static String SAVE_PATH="mysite-uploads/upload-images";
+	private final static String URL_PATH="/assets/upload-images";
 	public String restore(MultipartFile file) {
 			String url = null;
 		
 			try {
-				File uploadDirectory = new File(env.getProperty("fileupload.uploadLocation"));
+				File uploadDirectory = new File(SAVE_PATH);
 				if(!uploadDirectory.exists()) {
 					uploadDirectory.mkdirs();
 				}
@@ -46,11 +43,11 @@ public class FileuploadService {
 			System.out.println("#########" + fileSize);
 			
 			byte[] data = file.getBytes();
-			OutputStream os = new FileOutputStream(env.getProperty("fileupload.uploadLocation") + "/" + saveFilename);
+			OutputStream os = new FileOutputStream(SAVE_PATH + "/" + saveFilename);
 			os.write(data);
 			os.close();
 		
-			url = env.getProperty("fileupload.resourceUrl") + "/" + saveFilename;
+			url = URL_PATH + "/" + saveFilename;
 		} catch(IOException ex) {
 			throw new FileuploadServiceException(ex.toString());
 		}
