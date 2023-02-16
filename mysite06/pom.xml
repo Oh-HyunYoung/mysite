@@ -72,7 +72,17 @@
 		    <artifactId>mariadb-java-client</artifactId>
 		</dependency>
 		
+		<!-- JSTL -->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		</dependency>
 		
+		<!-- Tomcat Jasper -->
+		<dependency>
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>	
 		
 		<!-- Spring Boot Test Integration -->
 		<dependency>
