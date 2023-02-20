@@ -52,10 +52,6 @@ public class AdminController {
 		
 		siteService.updateSite(vo);
 		servletContext.setAttribute("sitevo", vo);
-//		site.setTitle(vo.getTitle());
-//		site.setWelcome(vo.getWelcome());
-//		site.setProfile(vo.getProfile());
-//		site.setDescription(vo.getDescription());
 		BeanUtils.copyProperties(vo,site);
 		
 		return "redirect:/admin";
