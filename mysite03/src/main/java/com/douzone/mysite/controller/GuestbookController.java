@@ -43,7 +43,7 @@ public class GuestbookController{
 	public String delete(@PathVariable("no") Long no, @RequestParam("password") String password) {
 		guestbookService.deleteMessage(no, password);
 			return "redirect:/guestbook";
-		}
+	}
 
 	@RequestMapping("/spa")
 	public String indexSPA() {

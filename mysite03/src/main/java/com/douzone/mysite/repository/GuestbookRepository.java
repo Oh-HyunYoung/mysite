@@ -25,4 +25,8 @@ public class GuestbookRepository {
 		Map<String, Object> map = Map.of("no", no, "password", password);
 		return sqlSession.delete("guestbook.deleteByNoAndPassword", map);
 	}
+
+	public List<GuestbookVo> findAll(Long no) {
+		return sqlSession.selectList("guestbook.findAllByNo", no);
+	}	
 }
