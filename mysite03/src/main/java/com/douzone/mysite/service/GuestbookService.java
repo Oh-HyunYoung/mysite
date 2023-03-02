@@ -17,8 +17,12 @@ public class GuestbookService {
 		return guestbookRepository.findAll();
 	}
 	
-	public void deleteMessage(Long no, String password) {
-		guestbookRepository.deleteByNoAndPassword(no,password);
+	public Boolean deleteMessage(Long no, String password) {
+		GuestbookVo vo = new GuestbookVo();
+		vo.setNo(no);
+		vo.setPassword(password);
+		
+		return 1 == guestbookRepository.deleteByNoAndPassword(no, password);
 	}
 	
 	public void addMessage(GuestbookVo vo) {
