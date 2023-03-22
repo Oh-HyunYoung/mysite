@@ -52,6 +52,12 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.2.2</version>
 		</dependency>
+		
+		<!-- Spring Boot Validation Stater -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
 
 		<!-- Mariadb JDBC Driver -->
 		<dependency>
