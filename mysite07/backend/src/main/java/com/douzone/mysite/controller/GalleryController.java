@@ -31,8 +31,10 @@ public class GalleryController {
 	private FileUploadService FileUploadService;
 	
 	@GetMapping("")
-	public ResponseEntity<JsonResult> index(Model model) {
-		return ResponseEntity.status(HttpStatus.OK).body(JsonResult.success(galleryService.getGalleryImages()));
+	public ResponseEntity<JsonResult> index() {
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.body(JsonResult.success(galleryService.getGalleryImages()));
 	}
 	
 	@PostMapping
