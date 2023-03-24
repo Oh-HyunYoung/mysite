@@ -11,3 +11,9 @@
 
 ## node(javascript) project
 **/node_modules
+
+## IntelliJ IDE
+**/.idea
+**/*.iws
+**/*.iml
+**/*.ipr

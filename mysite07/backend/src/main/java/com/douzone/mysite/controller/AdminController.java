@@ -13,7 +13,7 @@ import com.douzone.mysite.service.SiteService;
 
 @Auth(role="ADMIN")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/main")
 public class AdminController {
 
 

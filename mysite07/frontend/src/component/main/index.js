@@ -1,15 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import MySiteLayout from "../../layout/MySiteLayout";
 import styles from '../../assets/scss/component/main/Main.scss';
-import {NavLink} from "react-router-dom";
 import Admin from "./Admin";
 
-export default function Main() {
+const index = () => {
     const [mainList, setMainList] = useState([]);
 
     const fetchList = async () => {
         try {
-            const response = await fetch('/api', {
+            const response = await fetch('/api/main', {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json'
@@ -27,8 +26,10 @@ export default function Main() {
             setMainList(json.data);
             console.log(mainList);
             console.log(setMainList);
+            console.log(response);
+
         } catch (err) {
-            console.error(err);
+            console.error(err.message);
         }
     }
 
@@ -39,15 +40,19 @@ export default function Main() {
     return (
         <MySiteLayout>
             <div className={styles.siteintroduction }>
-            <img id="profile" src="" />
-            
-                <Admin no={mainList.no}
-                   title={mainList.title}
-                   welcome={mainList.welcome}
-                   profile={mainList.profile}
-                   description={mainList.description}        />
+           <span style={{}}/>
+           <h2>{mainList.welcome}</h2>
+           <p>
+                {mainList.description}
+                <br/>
+                <a href=''>방명록</a>에 글 남기기<br/>
+             
 
-            </div>
+           </p>
+           </div>
         </MySiteLayout>
     );
 }
+
+
+export default index;

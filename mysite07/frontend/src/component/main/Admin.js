@@ -1,7 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import styles from '../../assets/scss/component/main/Main.scss';
 
-const admin = ({no, title, welcome, profile, description}) => {
+const Admin = ({mainList}) => {
+    return (
+        <div className={styles.siteintroduction }/>
+        // {
+        //     mainList.map(main => <Admin
+        //                          no={main.no}
+        //                          title={main.title}
+        //                          welcome={main.welcome}
+        //                          profile={main.profile}
+        //                          description={main.description}
+        //                          />)
+        // }
+        
+    );
+};
 
-}
-export default admin;
+export default Admin;
